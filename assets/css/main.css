@@ -522,12 +522,25 @@ ul.social-icons li a .fa-linkedin:hover {
   }
 }
 
-
-.hidden {
-  animation: slideOutLeft 1s forwards;
+.section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
 }
 
-.visible {
-  animation: slideInRight 1s forwards;
+.hidden {
+  display: none;
+}
+
+.slide-out {
+  animation-name: slideOutLeft;
+}
+
+.slide-in {
+  animation-name: slideInRight;
 }
 

@@ -14,25 +14,40 @@ const aboutSection = document.querySelector('section.about');
 
     const total=videoSection.clientHeight- window.innerHeight;
     const totalabout=aboutSection.clientHeight- window.innerHeight;
+    const rect = aboutSection.getBoundingClientRect();
+    const rectVideo = videoSection.getBoundingClientRect();
+   
+    const st = window.pageYOffset || document.documentElement.scrollTop;
+    let scrollup=st < lastScrollTop;
     let percentage=distance/total;
+
     percentage=Math.max(0,percentage);
     percentage=Math.min(percentage,1);
-
+    console.log(percentage)
     if(video.duration>0)
         {
-            video.currentTime=video.duration*percentage;
-               console.log(totalabout,total,distanceabout,distance)
-            if(video.currentTime===video.duration&&total-distance<100)
+            currentTime=video.duration*percentage;
+            if(currentTime===video.duration)
+                video.currentTime=currentTime-0.2;
+            else
+            video.currentTime=currentTime;
+            
+            if(currentTime===video.duration&&rect.top<=700&&!scrollup)
                 { videoSection.style.opacity='0';
+            videoSection.classList.add('slide-out');
+
+                    
                     
                 }
-            else{
+            else if(rectVideo.bottom>700){
                 { videoSection.style.opacity='1';
-               
+                videoSection.classList.add('slide-in');
+
+              
                 }
             }
         }
-        
+        lastScrollTop = st <= 0 ? 0 : st;
 }
  window.addEventListener('scroll', scroll);
 
